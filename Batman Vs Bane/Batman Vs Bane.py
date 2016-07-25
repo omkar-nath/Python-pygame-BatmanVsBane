@@ -23,7 +23,10 @@ grey=(128,128,128)
 teal=(0,128,128)
 display_width=1000
 display_height=563
-
+bat_width=20
+bat_height=20
+bat_initial_x=900
+bat_initial_y=500
 gameDisplay=pygame.display.set_mode((display_width,display_height))
 clock=pygame.time.Clock()
 intro_image=pygame.image.load("game_intro2.jpg")
@@ -33,6 +36,15 @@ smallfont=pygame.font.Font("batmfa__.ttf",22);
 mediumfont=pygame.font.Font("style.otf",30)
 largefont=pygame.font.Font("batmfo__.ttf",60)
 extralarge=pygame.font.SysFont("style.otf",120)
+
+
+def batman(x,y,hand_position):
+
+
+    x=int(x)
+    y=int(y)
+    pygame.draw.rect(gameDisplay,black,(x,y,bat_width,bat_height))
+ 
 
 
 
@@ -202,31 +214,21 @@ def game_intro():
 def gameLoop():
             pygame.mixer.music.stop()
             player_health=100
+            bat_move=0
+            bat_initial_x=900
+            bat_initial_y=500 
             enemy_health=100
             gameExit=False
             gameOver=False
-            #while not gameExit:
             while not gameExit:
-                               for event in pygame.event.get():
-                                  if event.type==pygame.QUIT:
-                                           gameOver=False
-                                           gameExit=True
-                                  if event.type==pygame.KEYDOWN:
-                                       if event.key==pygame.K_q:
-                                            gameExit=True
-                                            gameOver=False
-                                       if event.key==pygame.K_c:
-                                            gameLoop()
-                               for event in pygame.event.get():
-                                  if event.type==pygame.QUIT:
-                                            gameExit=True
-
-
-                           
-                               gameDisplay.fill(grey)
-                               
-                               health_bars(player_health,enemy_health)
-                               pygame.display.update()
+                if gameOver==True:
+                    message_to_screen("Game Over",dark_yellow,,y_displace=-50,size="large")
+                while gameOver==True:
+                    for event in pygame.event.get():
+                        if event.type==pygame.QUIT:
+                            gameOver=False
+                            gameExit=False
+                        if event.type=
             pygame.quit()
             quit()
 game_intro()
